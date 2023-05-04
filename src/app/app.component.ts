@@ -11,10 +11,12 @@ export class AppComponent {
 
   sourceList: Satellite[];
   displayList: Satellite[];
+  typeList: [];
 
 	constructor() {
 		this.sourceList = [];
 		this.displayList = [];
+		this.typeList = [];
 		let satellitesUrl = 'https://handlers.education.launchcode.org/static/satellites.json';
 
 		window.fetch(satellitesUrl).then(function (response) {
@@ -31,6 +33,12 @@ export class AppComponent {
 
 				 // make a copy of the sourceList to be shown to the user
 				 this.displayList = this.sourceList.slice(0);
+				 
+				 for (let satellite of this.displayList) {
+					if (!this.typeList.includes(satellite.type)) {
+						this.typeList.push(satellite.type);
+					}
+				 }
 	  
 			}.bind(this));
 		}.bind(this));
